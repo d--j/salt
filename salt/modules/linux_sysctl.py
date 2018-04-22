@@ -129,13 +129,13 @@ def assign(name, value):
         tran_tab = name.translate(''.maketrans('./', '/.'))
     else:
         if isinstance(name, unicode):  # pylint: disable=incompatible-py3-code
-            trans_args = ({
+            trans_arg = {
                 ord('/'): '.',
                 ord('.'): '/'
-            },)
+            }
         else:
-            trans_args = string.maketrans('./', '/.')
-        tran_tab = name.translate(*trans_args)
+            trans_arg = string.maketrans('./', '/.')
+        tran_tab = name.translate(trans_arg)
 
     sysctl_file = '/proc/sys/{0}'.format(tran_tab)
     if not os.path.exists(sysctl_file):
